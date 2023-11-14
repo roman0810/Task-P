@@ -23,14 +23,9 @@ from bs4 import BeautifulSoup
 with open('WB.html') as f:
    soup1 = BeautifulSoup(f, "html.parser")
 
-with open('YA.html') as f:
-   soup2 = BeautifulSoup(f, "html.parser")
-
 mydivs1 = soup1.find_all("span", {"class": "address-item__name-text"})
-mydivs2 = soup2.find_all("a", {"class": "search-business-snippet-view__address"})
 
 print(len(mydivs1))
-print(len(mydivs2))
 
 import pandas as pd
 
@@ -38,15 +33,8 @@ WB = []
 for div in mydivs1:
 	WB.append(str(div)[44:-14])
 
-YA = []
-for div in mydivs2:
-	YA.append(str(div)[127:-4])
-
 WB_data = {"adr": WB}
 WB_frame = pd.DataFrame(data = WB_data)
-
-YA_data = {"adr": YA}
-YA_frame = pd.DataFrame(data = YA_data)
 
 WB_frame.to_excel("/Users/romanvisotsky/Desktop/adr.xlsx")
 
